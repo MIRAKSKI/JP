@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Selector</title>
+    <style>
+        window {width:100%;height:100%;}
+        .container {
+            position: absolute;width:50%;
+            top:30%;left:50%;
+            transform:translateX(-50%);
+            display:grid;
+        }
+        .container input {width:100%;}
+        .nbtn {
+            position: absolute; width:50%;top:50%;
+            left:25%;
+        }
+    </style>
+</head>
+<body id="bd">
+    <div class="container">
+        <p id="pelem">I like you Jan, do you like me.</p>
+        <input id="ybtn" type="button" value="Yes" onclick="op('y')">
+        <input id="nbtn" type="button" value="No"  onclick="op('n')" onmouseenter="op('n')" onmouseover="op('n')">
+    </div>
+    
+</body>
+<script>
+    //set values
+    var st = 0,fg = 0;
+    var ht = window.innerHeight;
+    var wt = window.innerWidth;
+    function resz() {
+        if (fg == 1) {
+            ht = window.innerheight;
+            wt = window.innerWidth;
+            //op("n");
+        }
+    }
+    window.addEventListener("resize", resz);
+    function op(arg) {
+        if (arg=="y") {
+            document.getElementById("pelem").innerText ="Thanks I accept you as my Girlfriend ❤.";
+            document.getElementById("ybtn").remove();
+            document.getElementById("nbtn").remove();
+        }
+        else {
+            if (st == 0) {
+                document.getElementById("nbtn").remove();
+                var nbtn = document.createElement("input");
+                nbtn.setAttribute("type", "button");
+                nbtn.setAttribute("value", "No");
+                nbtn.setAttribute("id", "nbtn");
+                nbtn.setAttribute("onclick", "op('n')");
+                nbtn.setAttribute("onmouseenter", "op('n')");
+                nbtn.setAttribute("onmouseover", "op('n')");
+                nbtn.setAttribute("class", "nbtn");
+                document.getElementById("bd").appendChild(nbtn);
+                st++;
+            }
+            var wibtn, hebtn;
+            wbn = document.getElementById("nbtn").offsetWidth;
+            hbn = document.getElementById("nbtn").offsetHeight;
+            cnvw = wt - wbn;
+            cnvh = ht - (wbn / 10);
+            console.log(cnvh)
+            wibtn = Math.random() * cnvw;
+            hebtn = Math.random() * cnvh;
+            console.log(wibtn, hebtn);
+            let sen = "left:"+wibtn+"px;top:"+hebtn+"px;";
+            document.getElementById("nbtn").setAttribute("style", sen)
+        }
+    }
+    fg = 1;
+</script>
+</html>
